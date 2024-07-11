@@ -1,2 +1,2 @@
 Patch Commands:
-patch <location_source>/Linux_for_Tegra/source/public/kernel/nvidia/drivers/net/wireless/realtek/rtl8822ce/wifi_regd.c < <location_patch>/wifi_regd.c
+patch <location_source>/Linux_for_Tegra/source/public/kernel/nvidia/drivers/net/wireless/realtek/rtl8822ce/wifi_regd.c < <location_patch>/wifi_regd.patch
