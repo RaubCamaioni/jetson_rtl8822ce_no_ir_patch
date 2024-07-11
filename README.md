@@ -25,8 +25,8 @@ Starting with Jetson Linux 36.2 the rtl8822ce drivers moved from being an kernel
 A different source patch and .ko file is used for kernel-driver vs oot.  
 
 # Real World Testing
-I have only preformed the patch for Jetson Linux 35.4.1 and 36.3.0.  
-The path for 35.4.1 will probably work for older version of 35.* or 34.*.  
+I have only preformed the patch for Jetson Linux 35.5.0 and 36.3.0.  
+The patch for 35.5.0 will probably work for older version of 35.* or 34.*.  
 
 # What about other Wifi Module Drivers?
 Different wifi drivers will follow similar conventions.  
@@ -35,11 +35,11 @@ Read through the driver and remove the locations setting the NO_IR flag.
 
 # Building Process
 I built the drivers directly on the machine, I have not experimented with cross compile.  
-Use the [jetpack](https://developer.nvidia.com/embedded/jetpack-archive) to determine what L4T version you are using.
+Use [jetpack](https://developer.nvidia.com/embedded/jetpack-archive) to determine what L4T version you are using.  
 Use [L4T](https://developer.nvidia.com/embedded/jetson-linux-archive) to directly select a L4T version.  
 
 Download the source code for the applicable L4T version.
-[Driver Package (BSP) Sources](https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/sources/public_sources.tbz2)
+[Driver Package (BSP) Sources (36.3.0)](https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/sources/public_sources.tbz2)
 
 Steps to unpack and build 36.3.  For older version there is no oot, you must build the entire kernel and pull out the rtl8822ce.ko
 ```
