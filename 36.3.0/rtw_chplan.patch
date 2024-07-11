@@ -1,0 +1,81 @@
+@@ -203,8 +203,9 @@ static bool rtw_chplan_get_ch(u8 id, const u32 ch, u8 *flags)
+ 						|| (rtw_is_5g_band2(ch) && (attrib & CLA_5G_B2_PASSIVE)) /* band2 passive */
+ 						|| (rtw_is_5g_band3(ch) && (attrib & CLA_5G_B3_PASSIVE)) /* band3 passive */
+ 						|| (rtw_is_5g_band4(ch) && (attrib & CLA_5G_B4_PASSIVE)) /* band4 passive */
+-					)
+-						*flags |= RTW_CHF_NO_IR;
++					) {
++						// *flags |= RTW_CHF_NO_IR;
++					}
+ 
+ 					if ((rtw_is_5g_band2(ch) && (attrib & CLA_5G_B2_DFS))
+ 						|| (rtw_is_5g_band3(ch) && (attrib & CLA_5G_B3_DFS))
+@@ -224,8 +225,9 @@ static bool rtw_chplan_get_ch(u8 id, const u32 ch, u8 *flags)
+ 		for (index = 0; index < CH_LIST_LEN(rtw_channel_def_2g[chd_2g]); index++) {
+ 			if (CH_LIST_CH(rtw_channel_def_2g[chd_2g], index) == ch) {
+ 				if (flags) {
+-					if (ch >= 12 && ch <= 14 && (attrib & CLA_2G_12_14_PASSIVE))
+-						*flags |= RTW_CHF_NO_IR;
++					if (ch >= 12 && ch <= 14 && (attrib & CLA_2G_12_14_PASSIVE)) {
++						//*flags |= RTW_CHF_NO_IR;
++					}
+ 				}
+ 				return 1;
+ 			}
+@@ -338,8 +340,9 @@ static bool rtw_chplan_6g_get_ch(u8 id, const u32 ch, u8 *flags)
+ 					|| (rtw_is_6g_band2(ch) && (attrib & CLA_6G_B2_PASSIVE)) /* band2 passive */
+ 					|| (rtw_is_6g_band3(ch) && (attrib & CLA_6G_B3_PASSIVE)) /* band3 passive */
+ 					|| (rtw_is_6g_band4(ch) && (attrib & CLA_6G_B4_PASSIVE)) /* band4 passive */
+-				)
+-					*flags |= RTW_CHF_NO_IR;
++				) {
++					// *flags |= RTW_CHF_NO_IR;
++				}
+ 			}
+ 			return 1;
+ 		}
+@@ -456,8 +459,9 @@ static u8 init_channel_set_from_rtk_priv_2g_5g(_adapter *adapter, RT_CHANNEL_INF
+ 			channel_set[chanset_size].band = BAND_ON_2_4G;
+ 			channel_set[chanset_size].ChannelNum = ch;
+ 
+-			if (ch >= 12 && ch <= 14 && (attrib & CLA_2G_12_14_PASSIVE))
+-				channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++			if (ch >= 12 && ch <= 14 && (attrib & CLA_2G_12_14_PASSIVE)) {
++				// channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++			}
+ 
+ 			if (channel_set[chanset_size].flags & RTW_CHF_NO_IR) {
+ 				if (!rtw_rfctl_reg_allow_beacon_hint(rfctl) || !rtw_chinfo_allow_beacon_hint(&channel_set[chanset_size], 0))
+@@ -499,8 +503,9 @@ static u8 init_channel_set_from_rtk_priv_2g_5g(_adapter *adapter, RT_CHANNEL_INF
+ 				|| (rtw_is_5g_band2(ch) && (attrib & CLA_5G_B2_PASSIVE)) /* band2 passive */
+ 				|| (rtw_is_5g_band3(ch) && (attrib & CLA_5G_B3_PASSIVE)) /* band3 passive */
+ 				|| (rtw_is_5g_band4(ch) && (attrib & CLA_5G_B4_PASSIVE)) /* band4 passive */
+-			)
+-				channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++			) {
++				// channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++			}
+ 
+ 			if (dfs)
+ 				channel_set[chanset_size].flags |= RTW_CHF_DFS;
+@@ -562,8 +567,9 @@ static u8 init_channel_set_from_rtk_priv_6g(_adapter *adapter, RT_CHANNEL_INFO *
+ 			|| (rtw_is_6g_band2(ch) && (attrib & CLA_6G_B2_PASSIVE)) /* band2 passive */
+ 			|| (rtw_is_6g_band3(ch) && (attrib & CLA_6G_B3_PASSIVE)) /* band3 passive */
+ 			|| (rtw_is_6g_band4(ch) && (attrib & CLA_6G_B4_PASSIVE)) /* band4 passive */
+-		)
+-			channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++		) {
++			// channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++		}
+ 
+ 		chanset_size++;
+ 	}
+@@ -714,7 +720,7 @@ u8 rtw_clr_dfs_beacon_hint(_adapter *adapter)
+ 		if ((chset[i].flags & RTW_CHF_DFS) && !(chset[i].flags & RTW_CHF_NO_IR)) {
+ 			RTW_INFO("%s: change band:%s ch:%d to inactive\n",
+ 				__func__, band_str(chset[i].band), chset[i].ChannelNum);
+-			chset[i].flags |= RTW_CHF_NO_IR;
++			// chset[i].flags |= RTW_CHF_NO_IR;
+ 		}
+ 	}
+ 	return 0;

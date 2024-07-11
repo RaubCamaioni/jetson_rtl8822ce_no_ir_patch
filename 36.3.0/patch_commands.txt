@@ -1,0 +1,3 @@
+Patch Commands:
+patch <location_source>/Linux_for_Tegra/source/nvidia-oot/drivers/net/wireless/realtek/rtl8822ce/core/rtw_chplan.c < <location_patch>/rtw_chplan.patch 
+patch <location_source>/Linux_for_Tegra/source/nvidia-oot/drivers/net/wireless/realtek/rtl8822ce/os_dep/linux/wifi_regd.c < <location_patch>/wifi_regd.patch 

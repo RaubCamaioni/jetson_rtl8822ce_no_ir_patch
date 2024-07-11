@@ -1,0 +1,42 @@
+@@ -55,7 +55,7 @@ static struct ieee80211_reg_rule rtw_get_ieee80211_reg_rule(struct get_chplan_re
+ {
+ 	struct ieee80211_reg_rule rule = REG_RULE(
+ 		start_freq - 10, end_freq + 10, 20, 6, 20,
+-		((flags & RTW_CHF_NO_IR) ? NL80211_RRF_NO_IR : 0)
++		0 // ((flags & RTW_CHF_NO_IR) ? NL80211_RRF_NO_IR : 0)
+ 		//| ((flags & RTW_CHF_DFS) ? NL80211_RRF_DFS : 0) /* TODO: DFS */
+ 	);
+ 
+@@ -64,6 +64,7 @@ static struct ieee80211_reg_rule rtw_get_ieee80211_reg_rule(struct get_chplan_re
+ 
+ 	if (!(chplan->proto_en & CHPLAN_PROTO_EN_AC) || band == BAND_ON_2_4G)
+ 		regd_max_bw = 40;
++	
+ 	/* TODO: !RFCTL_REG_EN_11HT(rfctl) limit to 20MHz  */
+ 
+ 	while ((end_freq - start_freq + 20) < frange_max_bw) {
+@@ -116,7 +117,7 @@ loop:
+ 			continue;
+ 		}
+ 		band = chinfo->band;
+-		flags = chinfo->flags & (RTW_CHF_NO_IR | RTW_CHF_DFS);
++		flags = chinfo->flags & (RTW_CHF_DFS);
+ 
+ 		if (start_band == BAND_MAX) {
+ 			start_band = band;
+@@ -368,11 +369,12 @@ u8 rtw_os_init_channel_set(_adapter *padapter, RT_CHANNEL_INFO *channel_set)
+ 			channel_set[chanset_size].ChannelNum = chan->hw_value;
+ 			channel_set[chanset_size].band = nl80211_band_to_rtw_band(i);
+ 			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
+-			if (chan->flags & (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN))
++			if (chan->flags & (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN)) {
+ 			#else
+-			if (chan->flags & IEEE80211_CHAN_NO_IR)
++			if (chan->flags & IEEE80211_CHAN_NO_IR) {
+ 			#endif
+-				channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++				// channel_set[chanset_size].flags |= RTW_CHF_NO_IR;
++			}
+ 			if (chan->flags & IEEE80211_CHAN_RADAR)
+ 				channel_set[chanset_size].flags |= RTW_CHF_DFS;
+ 			#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 27))
