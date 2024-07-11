@@ -51,3 +51,9 @@ tar -xvf kernel_oot_modules_src.tbz2 # there will be no oot modules for version 
 tar -xvf nvidia_kernel_display_driver_source.tbz2
 ./nvbuild.sh -o $PWD/kernel_out -m # builds only the oot
 ```
+
+## Nvidia Building Instruction
+I have mixed results following nvidia build webpage: [Kernal Customization](https://docs.nvidia.com/jetson/archives/r36.3/DeveloperGuide/SD/Kernel/KernelCustomization.html#:~:text=Building%20the%20NVIDIA%20Out-of-Tree%20Modules%201%20Go%20to,update%20the%20initramfs%2C%20run%20the%20following%20commands%3A%20)  
+When you unpack the Driver Package (BSP) Sources, and the kernel_source tar there is a build scirpt ./nvbuild.sh  
+That build script has consistently worked for me.  
+
