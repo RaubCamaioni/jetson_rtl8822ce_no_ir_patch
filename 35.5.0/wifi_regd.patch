@@ -1,42 +1,42 @@
-@@ -273,13 +273,10 @@
+@@ -273,10 +273,13 @@
  
  		if (sband) {
  			for (j = 0; j < sband->n_channels; j++) {
--				
++				
  				ch = &sband->channels[j];
--				ch->flags &= ~IEEE80211_CHAN_RADAR;
--				ch->flags &= ~IEEE80211_CHAN_NO_IR;
++				ch->flags &= ~IEEE80211_CHAN_RADAR;
++				ch->flags &= ~IEEE80211_CHAN_NO_IR;
  
--				// if (ch)
--				// 	ch->flags = IEEE80211_CHAN_DISABLED;
-+				if (ch)
-+					ch->flags = IEEE80211_CHAN_DISABLED;
+-				if (ch)
+-					ch->flags = IEEE80211_CHAN_DISABLED;
++				// if (ch)
++				// 	ch->flags = IEEE80211_CHAN_DISABLED;
  			}
  		}
  	}
-@@ -292,6 +289,7 @@
+@@ -289,7 +292,6 @@
  		ch = ieee80211_get_channel(wiphy, freq);
  		if (!ch)
  			continue;
-+
+-
  		if (channel_set[i].ScanType == SCAN_PASSIVE
  			#if defined(CONFIG_DFS_MASTER)
  			&& rtw_odm_dfs_domain_unknown(dvobj)
-@@ -300,7 +298,7 @@
+@@ -298,7 +300,7 @@
  			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
  			ch->flags = (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
  			#else
--			// ch->flags = IEEE80211_CHAN_NO_IR;
-+			ch->flags = IEEE80211_CHAN_NO_IR;
+-			ch->flags = IEEE80211_CHAN_NO_IR;
++			// ch->flags = IEEE80211_CHAN_NO_IR;
  			#endif
  		} else
  			ch->flags = 0;
-@@ -315,7 +313,7 @@
+@@ -313,7 +315,7 @@
  			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
  			ch->flags |= (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
  			#else
--			// ch->flags |= IEEE80211_CHAN_NO_IR;
-+			ch->flags |= IEEE80211_CHAN_NO_IR;
+-			ch->flags |= IEEE80211_CHAN_NO_IR;
++			// ch->flags |= IEEE80211_CHAN_NO_IR;
  			#endif
  		}
  		#endif /* CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS */
