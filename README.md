@@ -33,6 +33,12 @@ Different wifi drivers will follow similar conventions.
 They all use the ieee80211_channel_flags definitions for setting NO_IR, DISABLE, ect.  
 Read through the driver and remove the locations setting the NO_IR flag.  
 
+# Determine What jetpack / L4T device is using
+
+```
+dpkg -l | grep "nvidia-l4t"
+```
+
 # Building Process
 I built the drivers directly on the machine, I have not experimented with cross compile.  
 Use [jetpack](https://developer.nvidia.com/embedded/jetpack-archive) to determine what L4T version you are using.  
