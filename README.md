@@ -44,6 +44,11 @@ I built the drivers directly on the machine, I have not experimented with cross 
 Use [jetpack](https://developer.nvidia.com/embedded/jetpack-archive) to determine what L4T version you are using.  
 Use [L4T](https://developer.nvidia.com/embedded/jetson-linux-archive) to directly select a L4T version.  
 
+Install openssl development dependencies  
+```
+sudo apt install libssl-dev
+```
+
 Download the source code for the applicable L4T version.
 [Driver Package (BSP) Sources (36.3.0)](https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/sources/public_sources.tbz2)
 
