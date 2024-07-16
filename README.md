@@ -19,12 +19,12 @@ jetpack -> L4T mapping: [jetpack](https://developer.nvidia.com/embedded/jetpack-
 L4T Archive: [L4T](https://developer.nvidia.com/embedded/jetson-linux-archive)  
 
 # In-kernel vs Out-Of-Tree
-Starting with Jetson Linux 36.2 the rtl8822ce drivers moved from being an kernel-driver to an out-of-tree (oot) driver.  
+Starting with Jetson Linux 36.2 the rtl8822ce drivers moved from being a kernel-driver to an out-of-tree (oot) driver.  
 A different source patch and .ko file is used for kernel-driver vs oot.  
 
 # Real World Testing
 I have only preformed the patch for Jetson Linux 35.5.0 and 36.3.0.  
-The patch for 35.5.0 will probably work for older version of 35.* or 34.*.  
+The patch for 35.5.0 will probably work for older versions of jetson Linux 35.* or 34.*.  
 
 # What about other Wifi Module Drivers?
 Different wifi drivers will follow similar conventions.  
