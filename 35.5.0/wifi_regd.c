@@ -267,7 +267,7 @@ void rtw_regd_apply_flags(struct wiphy *wiphy)
 	u16 channel;
 	u32 freq;
 
-	/* all channels disable */
+	/* all channels enable */
 	for (i = 0; i < NUM_NL80211_BANDS; i++) {
 		sband = wiphy->bands[i];
 
@@ -275,50 +275,9 @@ void rtw_regd_apply_flags(struct wiphy *wiphy)
 			for (j = 0; j < sband->n_channels; j++) {
 				
 				ch = &sband->channels[j];
-				ch->flags &= ~IEEE80211_CHAN_RADAR;
-				ch->flags &= ~IEEE80211_CHAN_NO_IR;
-
-				// if (ch)
-				// 	ch->flags = IEEE80211_CHAN_DISABLED;
+				ch->flags = 0;
 			}
 		}
-	}
-
-	/* channels apply by channel plans. */
-	for (i = 0; i < max_chan_nums; i++) {
-		channel = channel_set[i].ChannelNum;
-		freq = rtw_ch2freq(channel);
-
-		ch = ieee80211_get_channel(wiphy, freq);
-		if (!ch)
-			continue;
-		if (channel_set[i].ScanType == SCAN_PASSIVE
-			#if defined(CONFIG_DFS_MASTER)
-			&& rtw_odm_dfs_domain_unknown(dvobj)
-			#endif
-		) {
-			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
-			ch->flags = (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
-			#else
-			// ch->flags = IEEE80211_CHAN_NO_IR;
-			#endif
-		} else
-			ch->flags = 0;
-
-		#if CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS
-		if (rtw_is_dfs_ch(ch->hw_value)
-			#if defined(CONFIG_DFS_MASTER)
-			&& rtw_odm_dfs_domain_unknown(dvobj)
-			#endif
-		) {
-			ch->flags |= IEEE80211_CHAN_RADAR;
-			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
-			ch->flags |= (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
-			#else
-			// ch->flags |= IEEE80211_CHAN_NO_IR;
-			#endif
-		}
-		#endif /* CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS */
 	}
 }
 

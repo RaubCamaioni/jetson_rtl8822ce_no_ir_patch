@@ -1,42 +1,63 @@
-@@ -273,10 +273,13 @@
+--- /home/tmdee/source/jetson_rtl8822ce_no_ir_patch/.source/jetson-linux-r3550/Linux_for_Tegra/source/public/kernel/nvidia/drivers/net/wireless/realtek/rtl8822ce/os_dep/linux/wifi_regd.c	2024-02-19 23:18:26.000000000 -0500
++++ /home/tmdee/source/jetson_rtl8822ce_no_ir_patch/35.5.0/wifi_regd.c	2024-07-16 09:16:25.926254194 -0400
+@@ -267,57 +267,18 @@
+ 	u16 channel;
+ 	u32 freq;
+ 
+-	/* all channels disable */
++	/* all channels enable */
+ 	for (i = 0; i < NUM_NL80211_BANDS; i++) {
+ 		sband = wiphy->bands[i];
  
  		if (sband) {
  			for (j = 0; j < sband->n_channels; j++) {
 +				
  				ch = &sband->channels[j];
-+				ch->flags &= ~IEEE80211_CHAN_RADAR;
-+				ch->flags &= ~IEEE80211_CHAN_NO_IR;
- 
+-
 -				if (ch)
 -					ch->flags = IEEE80211_CHAN_DISABLED;
-+				// if (ch)
-+				// 	ch->flags = IEEE80211_CHAN_DISABLED;
++				ch->flags = 0;
  			}
  		}
  	}
-@@ -289,7 +292,6 @@
- 		ch = ieee80211_get_channel(wiphy, freq);
- 		if (!ch)
- 			continue;
 -
- 		if (channel_set[i].ScanType == SCAN_PASSIVE
- 			#if defined(CONFIG_DFS_MASTER)
- 			&& rtw_odm_dfs_domain_unknown(dvobj)
-@@ -298,7 +300,7 @@
- 			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
- 			ch->flags = (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
- 			#else
+-	/* channels apply by channel plans. */
+-	for (i = 0; i < max_chan_nums; i++) {
+-		channel = channel_set[i].ChannelNum;
+-		freq = rtw_ch2freq(channel);
+-
+-		ch = ieee80211_get_channel(wiphy, freq);
+-		if (!ch)
+-			continue;
+-
+-		if (channel_set[i].ScanType == SCAN_PASSIVE
+-			#if defined(CONFIG_DFS_MASTER)
+-			&& rtw_odm_dfs_domain_unknown(dvobj)
+-			#endif
+-		) {
+-			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
+-			ch->flags = (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
+-			#else
 -			ch->flags = IEEE80211_CHAN_NO_IR;
-+			// ch->flags = IEEE80211_CHAN_NO_IR;
- 			#endif
- 		} else
- 			ch->flags = 0;
-@@ -313,7 +315,7 @@
- 			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
- 			ch->flags |= (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
- 			#else
+-			#endif
+-		} else
+-			ch->flags = 0;
+-
+-		#if CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS
+-		if (rtw_is_dfs_ch(ch->hw_value)
+-			#if defined(CONFIG_DFS_MASTER)
+-			&& rtw_odm_dfs_domain_unknown(dvobj)
+-			#endif
+-		) {
+-			ch->flags |= IEEE80211_CHAN_RADAR;
+-			#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
+-			ch->flags |= (IEEE80211_CHAN_NO_IBSS | IEEE80211_CHAN_PASSIVE_SCAN);
+-			#else
 -			ch->flags |= IEEE80211_CHAN_NO_IR;
-+			// ch->flags |= IEEE80211_CHAN_NO_IR;
- 			#endif
- 		}
- 		#endif /* CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS */
+-			#endif
+-		}
+-		#endif /* CONFIG_IEEE80211_BAND_5GHZ && CONFIG_DFS */
+-	}
+ }
+ 
+ static const struct ieee80211_regdomain *_rtw_regdomain_select(struct
