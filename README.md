@@ -69,4 +69,5 @@ That build script has consistently worked for me.
 ## Improving Speeds
 With the Azure wifi module the max theoretical speeds are 433 Mbits/s.  Wifi 5 ac.  
 Using modified 35.5.0 kernel drivers, I am unable to reach these speeds.  
+Practical iperf speeds: 220 Mbits/s  
 If you have a better hostapd configuration file or wifi driver, create an issue/pull request.   
