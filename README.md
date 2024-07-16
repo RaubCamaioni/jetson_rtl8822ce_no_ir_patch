@@ -2,8 +2,6 @@
 Patching Realtek driver included with Jetson Kernel or OOT drivers.  Used by AzureWave Wifi module included with Jetson Dev Kit.  
 
 # NO IR Legalities
-The software code provided here (the "Code") is for informational and educational purposes only. The Code is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.
-
 The NO_IR flag is present for a reason.  
 Each country has its own regulations for what 5G channels can be emitted on.  
 Disabling NO_IR puts the onus on the USER to properly follow local regulations.  
