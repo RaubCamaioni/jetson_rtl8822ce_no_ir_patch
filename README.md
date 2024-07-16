@@ -68,3 +68,7 @@ I have mixed results following nvidia build webpage: [Kernal Customization](http
 When you unpack the Driver Package (BSP) Sources, and the kernel_source tar there is a build scirpt ./nvbuild.sh  
 That build script has consistently worked for me.  
 
+## Improving Speeds
+With the Azure wifi module the max theoretical speeds are 433 Mbits/s.  Wifi 5 ac.  
+Using modified 35.5.0 kernel drivers, I am unable to reach these speeds.  
+If you have a better hostapd configuration file or wifi driver, create an issue/pull request.   
